@@ -31,6 +31,8 @@ Magic!
 	- bullet="false" Don't add bullets (default true)
 	- arrows="false" Don't add arrows (default true)
 
+## Demo 
+[http://wender.github.io/angular-slide-wrapper/](http://wender.github.io/angular-slide-wrapper/)
 
 Install via Bower
     bower install angular-slide-wrapper --save
