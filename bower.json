@@ -1,0 +1,8 @@
+{
+    "name": "angular-slide-wrapper",
+    "version": "0.1.0",
+    "main": "./src/angular-animated-label.js",
+    "dependencies": {
+        "angular": "^1.0.8"
+    }
+}
