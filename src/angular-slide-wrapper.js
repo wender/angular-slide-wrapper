@@ -162,6 +162,6 @@ function SlideWrapperDirective($compile, $interval) {
   };
 }
 
-angular.module('slideWrapper')
+angular.module('slideWrapper',[])
   .directive('slideWrapper', ['$compile', '$interval', SlideWrapperDirective]);
 
