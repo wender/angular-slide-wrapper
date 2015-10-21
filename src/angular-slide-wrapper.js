@@ -109,15 +109,38 @@ function SlideWrapperDirective($compile, $interval) {
         }, true);
 
 
-        // DOM manipulation
+        // Resize
+        window.addEventListener('resize',function(){
+            reset();
+        });
 
-        angular.element(uls[0]).addClass('slide');
-        uls[0].style.width = (scope.width * items.length) + 'px';
-        for (var a in items) {
-          if (typeof items[a] === 'object') {
-            items[a].style.width = scope.width + 'px';
+
+        // DOM manipulation
+        function reset(){
+          uls[0].style.marginLeft = 0;
+          scope.current = 0;
+          el[0].style.opacity = 0;
+          applyWidth(true);
+          applyBulletWidth(true);
+          scope.width = el[0].clientWidth || 0;
+          setTimeout(function(){
+            applyWidth();
+            applyBulletWidth();
+            el[0].style.opacity = 1;
+          },500);
+        }
+        function applyWidth(clear){
+          var clear = clear || false;
+          uls[0].style.width = clear?'auto':(scope.width * items.length) + 'px';
+          for (var a in items) {
+            if (typeof items[a] === 'object') {
+              items[a].style.width = clear?'auto':scope.width + 'px';
+            }
           }
         }
+
+        angular.element(uls[0]).addClass('slide');
+        applyWidth();
 
         if(arrows){
           html += '<span class="arrow left" ng-click="prev()" ng-show="showArrows && current>0"><i class="fa fa-chevron-left"></i></span><span class="arrow right" ng-click="next()" ng-show="showArrows && current<(total-1)"><i class="fa fa-chevron-right"></i></span>';
@@ -156,7 +179,12 @@ function SlideWrapperDirective($compile, $interval) {
         el.append(content);
 
         // Setting bullets width based on new elements
-        scope.bulletWidth = {'width':el[0].querySelectorAll('ul.'+cssBullets)[0].clientWidth+'px','margin-left':'calc(50% - '+(el[0].querySelectorAll('ul.'+cssBullets)[0].clientWidth/2)+'px)'};
+        function applyBulletWidth(clear){
+          var clear = clear || false;
+          scope.bulletWidth = {'width':clear?'auto':el[0].querySelectorAll('ul.'+cssBullets)[0].clientWidth+'px','margin-left':'calc(50% - '+(el[0].querySelectorAll('ul.'+cssBullets)[0].clientWidth/2)+'px)'};
+        }
+        applyBulletWidth();
+        
 
     }
   };
@@ -164,4 +192,3 @@ function SlideWrapperDirective($compile, $interval) {
 
 angular.module('slideWrapper',[])
   .directive('slideWrapper', ['$compile', '$interval', SlideWrapperDirective]);
-
