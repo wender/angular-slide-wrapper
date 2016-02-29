@@ -6,6 +6,7 @@
 function SlideWrapperDirective($compile, $interval) {
   return {
     restrict: 'E',
+    scope: true,
     link: function (scope, el, attr) {
       // Top level variables definition
       var html = '';
