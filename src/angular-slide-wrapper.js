@@ -173,7 +173,7 @@ function SlideWrapperDirective($compile, $interval) {
 
       // remove custom bullet, will be replaced by the new one
       if (uls[1]) {
-        uls[1].remove();
+        angular.element(uls[1]).remove();
       }
 
       // compile html to angular's scope
@@ -190,10 +190,6 @@ function SlideWrapperDirective($compile, $interval) {
         };
       }
 
-      // Remove custom bullet, will be replaced by the new one
-      if (uls[1]) {
-        angular.element(uls[1]).remove();
-      }
       applyBulletWidth();
     }
   };
