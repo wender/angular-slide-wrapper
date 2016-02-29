@@ -101,11 +101,13 @@ function SlideWrapperDirective($compile, $interval) {
 
       // Touch events
       el[0].addEventListener('touchmove', function (e) {
-        e.preventDefault();
         touchPosition.currentX = e.changedTouches[0].pageX;
         touchPosition.diff = parseInt(touchPosition.currentX - touchPosition.initialX);
-        var newMargin = touchPosition.initialMargin + touchPosition.diff;
-        uls[0].style.marginLeft = newMargin + 'px';
+        if(touchPosition.diff){
+          e.preventDefault();
+          var newMargin = touchPosition.initialMargin + touchPosition.diff;
+          uls[0].style.marginLeft = newMargin + 'px';
+        }
       }, true);
 
 
