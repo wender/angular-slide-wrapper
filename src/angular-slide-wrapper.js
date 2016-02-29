@@ -12,9 +12,9 @@ function SlideWrapperDirective($compile, $interval) {
         var uls = el[0].querySelectorAll('ul');
         var items = uls[0].querySelectorAll('li');
         var cssBullets = 'bullets';
-        var auto = attr.auto || true;
-        var bullet = attr.bullet || true;
-        var arrows = attr.arrows || true;
+        var auto = attr.auto==='false'?false:true;
+        var bullet = attr.bullet==='false'?false:true;
+        var arrows = attr.arrows==='false'?false:true;
         var hover = false;
         var interval = null;
         var touchPosition = {
@@ -170,7 +170,7 @@ function SlideWrapperDirective($compile, $interval) {
 
         // Remove custom bullet, will be replaced by the new one
         if(uls[1]){
-          uls[1].remove();
+          angular.element(uls[1]).remove();
         }
 
         // Compile html to angular's scope
